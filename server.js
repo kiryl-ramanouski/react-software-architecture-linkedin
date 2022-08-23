@@ -9,7 +9,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
 // Components
-import { App } from './src/App';
+import App from './src/App';
 
 const app = express();
 
@@ -34,4 +34,6 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.listen(8080, console.log('Server is listening on port 8080'));
+app.listen(8080, () => {
+  console.log('Server is listening on port 8080');
+});
