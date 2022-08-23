@@ -11,15 +11,22 @@ import { StaticRouter } from 'react-router-dom';
 // Components
 import App from './src/App';
 
+// Styles
+import { ServerStyleSheet } from 'styled-components';
+
 const app = express();
 
 app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
 
 app.get('/*', (req, res) => {
+  const sheet = new ServerStyleSheet();
+
   const reactApp = renderToString(
-    <StaticRouter location={req.url}>
-      <App />
-    </StaticRouter>
+    sheet.collectStyles(
+      <StaticRouter location={req.url}>
+        <App />
+      </StaticRouter>
+    )
   );
 
   const templateFile = path.resolve('./build/index.html');
@@ -29,7 +36,9 @@ app.get('/*', (req, res) => {
     }
 
     return res.send(
-      data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
+      data
+        .replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
+        .replace('{{ styles }}', sheet.getStyleTags())
     );
   });
 });
