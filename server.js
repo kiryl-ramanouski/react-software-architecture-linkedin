@@ -4,6 +4,8 @@ import { renderToString } from 'react-dom/server';
 
 const app = express();
 
+app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
+
 app.get('/*', (req, res) => {
   const reactApp = renderToString(<h1>Hello from the server side!</h1>);
 
