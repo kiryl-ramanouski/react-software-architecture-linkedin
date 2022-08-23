@@ -7,6 +7,9 @@ import path from 'path';
 import fs from 'fs';
 import App from './src/App';
 
+// Styles
+import { ServerStyleSheet } from 'styled-components';
+
 const app = express();
 
 app.use(express.static('./build', { index: false }));
