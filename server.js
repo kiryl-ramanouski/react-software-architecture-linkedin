@@ -1,5 +1,7 @@
 // Express
 import express from 'express';
+import path from 'path';
+import fs from 'fs';
 
 // React
 import React from 'react';
@@ -8,7 +10,6 @@ import { StaticRouter } from 'react-router-dom';
 
 // Components
 import { App } from './src/App';
-import { Home } from './src/pages/Home';
 
 const app = express();
 
@@ -21,13 +22,16 @@ app.get('/*', (req, res) => {
     </StaticRouter>
   );
 
-  return res.send(`
-    <html>
-      <body>
-        <div id="root">${reactApp}</div>
-      </body>
-    </html>
-  `);
+  const templateFile = path.resolve('./build/index.html');
+  fs.readFile(templateFile, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+    return res.send(
+      data.replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
+    );
+  });
 });
 
 app.listen(8080, console.log('Server is listening on port 8080'));
