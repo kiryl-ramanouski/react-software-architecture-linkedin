@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { counterState } from './counterState';
 
 export const DisplayCount = () => {
-  const numberOfClicks = useRecoilValue(counterState);
+  const clicksData = useRecoilValue(counterState);
 
-  return <h2>Number of clicks is {numberOfClicks}.</h2>;
+  return <h2>Number of clicks is {clicksData.length}.</h2>;
 };
