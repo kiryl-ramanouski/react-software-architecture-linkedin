@@ -3,7 +3,7 @@ import { counterState } from './counterState';
 import { incrementByState } from './incrementByState';
 
 export const CounterButton = () => {
-  const { numberOfClicks, setNumberOfClicks } = useRecoilState(counterState);
+  const [numberOfClicks, setNumberOfClicks] = useRecoilState(counterState);
   const [incrementBy, setIncrementBy] = useRecoilState(incrementByState);
 
   return (
