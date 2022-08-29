@@ -18,6 +18,17 @@ const app = express();
 
 app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
 
+const articles = [
+  { title: 'Articles 1', author: 'Bob1' },
+  { title: 'Articles 2', author: 'Bob2' },
+  { title: 'Articles 3', author: 'Bob3' },
+];
+
+app.get('/api/articles', (req, res) => {
+  const loadedArticles = articles;
+  res.json(loadedArticles);
+});
+
 app.get('/*', (req, res) => {
   const sheet = new ServerStyleSheet();
 
