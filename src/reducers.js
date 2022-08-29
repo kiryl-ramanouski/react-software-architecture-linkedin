@@ -3,7 +3,8 @@ export const numberOfClicksReducer = (state = 0, action) => {
 
   switch (type) {
     case 'COUNTER_BUTTON_CLICKED': {
-      return state + action.payload.amount;
+      const amount = action.payload;
+      return state + amount;
     }
     default:
       return state;

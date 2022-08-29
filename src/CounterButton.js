@@ -20,7 +20,9 @@ export const CounterButton = () => {
           type="number"
         />
       </label>
-      <button onClick={() => dispatch(counterButtonClicked)}>Click</button>
+      <button onClick={() => dispatch(counterButtonClicked(incrementBy))}>
+        Click
+      </button>
     </>
   );
 };
