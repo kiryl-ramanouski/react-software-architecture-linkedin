@@ -14,6 +14,8 @@ import App from './src/App';
 // Styles
 import { ServerStyleSheet } from 'styled-components';
 
+global.window = {};
+
 const app = express();
 
 app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
@@ -46,9 +48,16 @@ app.get('/*', (req, res) => {
       return res.status(500).send(err);
     }
 
+    const loadedArticles = articles;
+
     return res.send(
       data
-        .replace('<div id="root"></div>', `<div id="root">${reactApp}</div>`)
+        .replace(
+          '<div id="root"></div>',
+          `<script>window.preloadedArticles = ${JSON.stringify(
+            loadedArticles
+          )}</script> <div id="root">${reactApp}</div>`
+        )
         .replace('{{ styles }}', sheet.getStyleTags())
     );
   });
