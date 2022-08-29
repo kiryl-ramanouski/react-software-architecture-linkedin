@@ -1,9 +1,14 @@
+// React
 import React from 'react';
-import styled from 'styled-components';
 import { Switch, Route, Link } from 'react-router-dom';
+
+// Components
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Articles } from './pages/Articles';
+
+// Styles
+import styled from 'styled-components';
 
 const BigGreenHeading = styled.h1`
   color: green;

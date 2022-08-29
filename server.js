@@ -1,26 +1,22 @@
+// Express
 import express from 'express';
-import React from 'react';
-import { ServerStyleSheet } from 'styled-components';
-import { renderToString } from 'react-dom/server';
-import { StaticRouter } from 'react-router-dom';
 import path from 'path';
 import fs from 'fs';
+
+// React
+import React from 'react';
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
+
+// Components
 import App from './src/App';
+
+// Styles
+import { ServerStyleSheet } from 'styled-components';
 
 const app = express();
 
-app.use(express.static('./build', { index: false }));
-
-const articles = [
-  { title: 'Article 1', author: 'Bob' },
-  { title: 'Article 2', author: 'Betty' },
-  { title: 'Article 3', author: 'Frank' },
-];
-
-app.get('/api/articles', (req, res) => {
-  const loadedArticles = articles;
-  res.json(loadedArticles);
-});
+app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
 
 app.get('/*', (req, res) => {
   const sheet = new ServerStyleSheet();
