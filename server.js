@@ -2,6 +2,9 @@
 import path from 'path';
 import fs from 'fs';
 
+// Fetch for server
+import 'isomorphic-fetch';
+
 // Express
 import express from 'express';
 
