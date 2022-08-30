@@ -3,15 +3,20 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import { InitialDataContext } from './InitialDataContext';
 import reportWebVitals from './reportWebVitals';
 
 // hydrate takes pre-rendered HTML that we're going to get from the server and adds React to it
 // Despite of we're getting an HTML from the server, we still want to behave and rerender like ReactApp
 ReactDOM.hydrate(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <InitialDataContext
+      value={(window && window.preloadedData) || { _data: {} }}
+    >
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </InitialDataContext>
   </React.StrictMode>,
   document.getElementById('root')
 );
