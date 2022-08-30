@@ -10,13 +10,13 @@ import reportWebVitals from './reportWebVitals';
 // Despite of we're getting an HTML from the server, we still want to behave and rerender like ReactApp
 ReactDOM.hydrate(
   <React.StrictMode>
-    <InitialDataContext
+    <InitialDataContext.Provider
       value={(window && window.preloadedData) || { _data: {} }}
     >
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </InitialDataContext>
+    </InitialDataContext.Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
