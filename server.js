@@ -29,9 +29,9 @@ const app = express();
 app.use(express.static('./build', { index: false })); // Staticky serve the files inside build folder but don’t load base index.html by default
 
 const articles = [
-  { title: 'Articles 1', author: 'Bob1' },
-  { title: 'Articles 2', author: 'Bob2' },
-  { title: 'Articles 3', author: 'Bob3' },
+  { title: 'Article 1', author: 'Bob' },
+  { title: 'Article 2', author: 'Betty' },
+  { title: 'Article 3', author: 'Frank' },
 ];
 
 app.get('/api/articles', (req, res) => {
@@ -41,16 +41,16 @@ app.get('/api/articles', (req, res) => {
 
 app.get('/*', async (req, res) => {
   const sheet = new ServerStyleSheet();
-  const Provider = InitialDataContext.Provider;
+
   const contextObj = { _isServerSide: true, _requests: [], _data: {} };
 
   renderToString(
     sheet.collectStyles(
-      <Provider value={contextObj}>
+      <InitialDataContext.Provider value={contextObj}>
         <StaticRouter location={req.url}>
           <App />
         </StaticRouter>
-      </Provider>
+      </InitialDataContext.Provider>
     )
   );
 
@@ -59,11 +59,11 @@ app.get('/*', async (req, res) => {
   delete contextObj._requests;
 
   const reactApp = renderToString(
-    <Provider value={contextObj}>
+    <InitialDataContext.Provider value={contextObj}>
       <StaticRouter location={req.url}>
         <App />
       </StaticRouter>
-    </Provider>
+    </InitialDataContext.Provider>
   );
 
   const templateFile = path.resolve('./build/index.html');
@@ -71,13 +71,14 @@ app.get('/*', async (req, res) => {
     if (err) {
       return res.status(500).send(err);
     }
+
     return res.send(
       data
         .replace(
           '<div id="root"></div>',
           `<script>window.preloadedData = ${JSON.stringify(
             contextObj
-          )}</script> <div id="root">${reactApp}</div>`
+          )};</script><div id="root">${reactApp}</div>`
         )
         .replace('{{ styles }}', sheet.getStyleTags())
     );
