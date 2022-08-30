@@ -1,9 +1,11 @@
-// Express
-import express from 'express';
+// Standard
 import path from 'path';
 import fs from 'fs';
 
-// React
+// Express
+import express from 'express';
+
+// React for server
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -11,7 +13,7 @@ import { StaticRouter } from 'react-router-dom';
 // Components
 import App from './src/App';
 
-// Styles
+// Styles for server
 import { ServerStyleSheet } from 'styled-components';
 
 global.window = {};
