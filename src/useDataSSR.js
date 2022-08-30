@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { InitialDataContext } from './InitialDataContext';
 
 export const useDataSSR = (resourceName, loadFunc) => {
