@@ -1,24 +1,16 @@
 // React
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 // Components
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Articles } from './pages/Articles';
 
-// Styles
-import styled from 'styled-components';
-
-const BigGreenHeading = styled.h1`
-  color: green;
-  font-size: 96px;
-`;
-
 const App = () => {
   return (
-    <>
-      <BigGreenHeading>Server-Side Rendering Example</BigGreenHeading>
+    <BrowserRouter>
+      <h1>Server-Side Rendering Example</h1>
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -41,7 +33,7 @@ const App = () => {
           <Articles />
         </Route>
       </Switch>
-    </>
+    </BrowserRouter>
   );
 };
 
