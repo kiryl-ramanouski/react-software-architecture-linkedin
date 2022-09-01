@@ -23,7 +23,7 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // Можно отрендерить запасной UI произвольного вида.
-      return <h1>Something went wrong</h1>;
+      return <p>Something went wrong</p>;
     }
 
     return this.props.children;
