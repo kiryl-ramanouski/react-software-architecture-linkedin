@@ -32,3 +32,20 @@ const About = () => {
 };
 
 export default About;
+
+render() {
+  const isLoggedIn = this.state.isLoggedIn;
+  let button;
+  if (isLoggedIn) {
+    button = <LogoutButton onClick={this.handleLogoutClick} />;
+  } else {
+    button = <LoginButton onClick={this.handleLoginClick} />;
+  }
+
+  return (
+    <div>
+      <Greeting isLoggedIn={isLoggedIn} />
+      {button}
+    </div>
+  );
+}
